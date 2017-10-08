@@ -170,15 +170,14 @@ Hit refresh to see your newly created virtual Network.
 
 
 <a name="deployvm"></a>
-
 ### Deploy a VM on Azure in your Virtual Network
 
-* In the left panel, click virtual machines
-* click the create virtual machines button
-* We're going to choose Windows server choose Windows Server 2012 R2 Datacenter
-* For deployment model use resource manager
-* Under basic configuration type a username and  password and 
-* create using your existing Resource Group. 
+* In the left panel, click `Virtual Machines`
+* click the `Create Virtual Machines` button
+* We're going to choose a Windows server; choose `Windows Server 2012 R2 Datacenter`
+* For `Deployment model` use  `Resource manager`
+* Under `Basic configuration` type a username and  password and 
+* create using your existing `Resource Group`. 
   * ##### Note that your location may not support creating a VM under a free trial, in which case you will have to redo your whole networking scheme under a new resource location.
 * Choose whatever options you need for a relative price point
 * Most of the settings in step 3 will be pre-selected
