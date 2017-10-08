@@ -278,8 +278,8 @@ Multiple Phase 2s
 
 <a name="tunneling2ormore"></a>
 
-Tunneling more than one subnet over the phase 1 IPSec
--------------------
+### Tunneling more than one subnet over the phase 1 IPSec
+
 
 In order to route between two different subnets from the ipsec Azure side to pfSense, you need to
 add both of the subnets to azure and pfSense. On the Azure side you simply add more Address Spaces, and on the pfSense side you must create multiple phase2 definitions.
@@ -291,7 +291,6 @@ If you are modifying an ipsec connection, you will need to delete the existing V
 <a name="azureSide"></a>
 
  On the Azure side: 
--------------
 -------------
 
 * Go to `All resources`
@@ -322,7 +321,6 @@ In the `Local Network Gateway` that you've created
  <a name="pfsenseSide"></a>
  
 On the pfSense side:
---------------
 --------------
 
 * Go to `VPN`
