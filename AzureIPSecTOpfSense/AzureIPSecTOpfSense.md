@@ -93,7 +93,7 @@ Now we need to set up our Gateway Subnet<a name="gatewaysubnet"></a>
 
 ![](pics/Adding gateway subnet2.png)
 
-#### IT should look similar to this when you are finished
+#### It should look similar to this when you are finished
 ![](pics/Adding gateway subnet3.png)
 
 
@@ -293,7 +293,7 @@ In the `Local Network Gateway` that you've created
 #### Add as many subnets as you wish to connect to your `Virtual Network`s subnet 
 ![](2tunnelspics/Local Network Gateway setup 2 addspaces.png)
 
-#### It should look similar to this from teh Overview
+#### It should look similar to this in the Overview
 ![](2tunnelspics/Local Network Gateway Overview.png)
 
  Now, just below `Configuration` we will add a connection as we did above in the first senario.
@@ -304,8 +304,8 @@ In the `Local Network Gateway` that you've created
    * The `Local Network Gateway` is already chosen for you. 
    * Add a `Pre-shared Key` for the connection, and hit `okay`
 
-
-On the pfSense side: <a name="pfsenseSide"></a>
+ <a name="pfsenseSide"></a>
+On the pfSense side:
 --------------
 
 * Go to `VPN`
