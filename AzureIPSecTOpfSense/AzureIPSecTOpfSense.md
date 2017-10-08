@@ -3,6 +3,7 @@ IPsec Tunnel between Azure Virtual Network and pfSense
 
 Quick Links
 -------------
+### On The Azure Side
 * [First create a resource Group](#resourcegroup)
 * [Create a public IP address](#publicIP)
 * [Creating a Virtual Network, and First Subnet](#virtualnetwork)
@@ -10,8 +11,10 @@ Quick Links
 * [Create the Virtual Network Gateway](#virtualnetworkgateway)
 * [Create a Local Network Gateway definition](#localnetworkgateway)
 * [Create a Site to Site VPN Connection](#sitetositevpn)
-* [Setup pfSense to Connect to Azure through IPsec](#setuppfsense)
 * [Deploy a VM on Azure in your Virtual Network](#deployvm)
+
+### On THE pfSense SIDE
+* [Setup pfSense to Connect to Azure through IPsec](#setuppfsense)
 * [Pinging the Azure VM from pfSense or clients on the Local Network](#pingthevm)
 
 ### Multiple Phase 2s
@@ -23,8 +26,11 @@ Quick Links
 
 <a name="resourcegroup"></a>
 
-Creating a Resource Group
-------------------
+On The Azure Side
+-----------------
+
+### Creating a Resource Group
+
 First create a resource group that will be used to sort of organize everything else together in the same region. 
 * Click resource groups on the left panel 
 * Type a name for the resource Group and hit create.
@@ -33,10 +39,10 @@ First create a resource group that will be used to sort of organize everything e
 
 <a name="publicIP"></a>
 
-Now lets create a public IP address for our IPSEC connection
------------------------
+### Now lets create a public IP address for our IPSEC connection
 
- * ### If you're not sure where to find the public IP address settings
+
+ * #### If you're not sure where to find the public IP address settings
     * Just typed public IP address in the search bar at the top 
     * and as the results drop down under the services tab you will see an icon that says public IP addresses 
     * click the button. 
@@ -54,8 +60,8 @@ Now lets create a public IP address for our IPSEC connection
 
 <a name="virtualnetwork"></a>
 
-Creating a Virtual Network, and our first subnet
--------------------
+### Creating a Virtual Network, and our first subnet
+
 * Click Virtual networks on the left panel 
 * On the top click `+ Add` to add a Virtual Network.
 * Choose a name for your Virtual Network
@@ -81,8 +87,8 @@ Hit refresh to see your newly created virtual Network.
 
 <a name="gatewaysubnet"></a>
 
-Now we need to set up our Gateway Subnet
--------------------------
+### Now we need to set up our Gateway Subnet
+
 
 * On the left panel click `All Resources`
 * From the Menu that appears, click on your Existing Virtual Network 
@@ -97,7 +103,7 @@ Now we need to set up our Gateway Subnet
 
 ![](pics/Adding gateway subnet2.png)
 
-### It should look similar to this when you are finished
+#### It should look similar to this when you are finished
 ![](pics/Adding gateway subnet3.png)
 
 
@@ -106,8 +112,8 @@ Now we need to set up our Gateway Subnet
 
 <a name="virtualnetworkgateway"></a>
 
-We need to create a Virtual Network Gateway
----------------------------
+### We need to create a Virtual Network Gateway
+
 
 * Choose Network gateways from the left panel.
 * Click add under the middle panel that pops up. 
@@ -119,7 +125,7 @@ We need to create a Virtual Network Gateway
 * For the public IP address, choose the address that you created earlier from the drop-down list. 
 * Hit create.
 
-### Note: This may take up to 45 minutes to complete deployment.
+#### Note: This may take up to 45 minutes to complete deployment.
 
 ![](pics/VirtualNetworkGateway.png)
 
@@ -145,10 +151,10 @@ Create a Local Network Gateway definition
 
 
 
+
 <a name="sitetositevpn"></a>
 
-Create a Site to Site VPN Connection
----------------------
+### Create a Site to Site VPN Connection
 
 * If not still on the `Local Network Gateway`, click the name of your `Local Network Gateway`
 * and in the middle pane, click `Connections` 
@@ -164,22 +170,50 @@ Create a Site to Site VPN Connection
 
 
 
-<a name="setuppfsense"></a>
+<a name="deployvm"></a>
 
-Setup pfSense to Connect to Azure through IPsec !!
-----------------------------
+### Deploy a VM on Azure in your Virtual Network
+
+* In the left panel, click virtual machines
+* click the create virtual machines button
+* We're going to choose Windows server choose Windows Server 2012 R2 Datacenter
+* For deployment model use resource manager
+* Under basic configuration type a username and  password and 
+* create using your existing Resource Group. 
+  * ##### Note that your location may not support creating a VM under a free trial, in which case you will have to redo your whole networking scheme under a new resource location.
+* Choose whatever options you need for a relative price point
+* Most of the settings in step 3 will be pre-selected
+* Then finally purchase the VM and it will provision
+
+![](pics/VMdeploy.png)
+![](pics/VMdeploy2.png)
+![](pics/VMdeploy3.png)
+
+### Notice now in Overview of our Virtual Network
+  * The Server is listed with an external and internal IP Address
+ 
+![](pics/VMdeploy4.png)
+<br><br><br><br>
+
+
+
+On THE pfSense SIDE
+-------------------
+<a name="setuppfsense"></a>
+### Setup pfSense to Connect to Azure through IPsec !!
+
 * Login to pfsense
 * Go to the Top Menu bar and choose `VPN`
 * Choose IPsec
 * Visit https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices#ipsec for the IPsec parameters used on the Microsoft side in Azure
 
-### Taken from there we see the IKE Phase 1 requirements
+#### Taken from there we see the IKE Phase 1 requirements
 ![](pics/IKE Phase1.png)
 
-### And following are the IKE Phase 2 requirements
+#### And following are the IKE Phase 2 requirements
 ![](pics/IKE Phase2.png)
 
-### Setting up our IKE Phase1 in pfSense like so
+#### Setting up our IKE Phase1 in pfSense like so
 * The Key exchange can simply be set to auto
 * The `Remote Gateway` will be the Public IP Address given on Azure
 * Match the rest up to the specifications
@@ -207,41 +241,12 @@ Setup pfSense to Connect to Azure through IPsec !!
 
 ![](pics/pfSense IPsec Firewall Rules.png)
 ![](pics/pfSense IPsec Firewall Rules2.png)
-
-
-
-
-<a name="deployvm"></a>
-
-Deploy a VM on Azure in your Virtual Network
---------------------
-
-* In the left panel, click virtual machines
-* click the create virtual machines button
-* We're going to choose Windows server choose Windows Server 2012 R2 Datacenter
-* For deployment model use resource manager
-* Under basic configuration type a username and  password and 
-* create using your existing Resource Group. 
-  * ##### Note that your location may not support creating a VM under a free trial, in which case you will have to redo your whole networking scheme under a new resource location.
-* Choose whatever options you need for a relative price point
-* Most of the settings in step 3 will be pre-selected
-* Then finally purchase the VM and it will provision
-
-![](pics/VMdeploy.png)
-![](pics/VMdeploy2.png)
-![](pics/VMdeploy3.png)
-
-### Notice now in Overview of our Virtual Network
-  * The Server is listed with an external and internal IP Address
- 
-![](pics/VMdeploy4.png)
-
+<br><br><br><br>
 
 
 
 
 <a name="pingthevm"></a>
-
 Pinging the Azure VM from pfSense or clients on the Local Network
 ------------------------------
 The pictures above may be inaccurate due to some changes of the Azure setup.
@@ -289,8 +294,7 @@ If you are modifying an ipsec connection, you will need to delete the existing V
 
 
 <a name="azureSide"></a>
-
- On the Azure side: 
+On the Azure side: 
 -------------
 
 * Go to `All resources`
@@ -318,8 +322,10 @@ In the `Local Network Gateway` that you've created
    * The `Local Network Gateway` is already chosen for you. 
    * Add a `Pre-shared Key` for the connection, and hit `okay`
 
- <a name="pfsenseSide"></a>
- 
+
+
+
+<a name="pfsenseSide"></a>
 On the pfSense side:
 --------------
 
