@@ -195,7 +195,7 @@ Hit refresh to see your newly created virtual Network.
 
 
 
-On THE pfSense SIDE
+On THE pfSense Side:
 -------------------
 <a name="setuppfsense"></a>
 ### Setup pfSense to Connect to Azure through IPsec !!
@@ -245,6 +245,7 @@ On THE pfSense SIDE
 
 
 <a name="pingthevm"></a>
+
 Pinging the Azure VM from pfSense or clients on the Local Network
 ------------------------------
 The pictures above may be inaccurate due to some changes of the Azure setup.
@@ -291,6 +292,7 @@ If you are modifying an ipsec connection, you will need to delete the existing V
 
 
 <a name="azureSide"></a>
+
 On the Azure side: 
 -------------
 
