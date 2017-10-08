@@ -36,7 +36,7 @@ First create a resource group that will be used to sort of organize everything e
 Now lets create a public IP address for our IPSEC connection
 -----------------------
 
- * #### If you're not sure where to find the public IP address settings
+ * ### If you're not sure where to find the public IP address settings
     * Just typed public IP address in the search bar at the top 
     * and as the results drop down under the services tab you will see an icon that says public IP addresses 
     * click the button. 
@@ -97,7 +97,7 @@ Now we need to set up our Gateway Subnet
 
 ![](pics/Adding gateway subnet2.png)
 
-#### It should look similar to this when you are finished
+### It should look similar to this when you are finished
 ![](pics/Adding gateway subnet3.png)
 
 
@@ -119,7 +119,7 @@ We need to create a Virtual Network Gateway
 * For the public IP address, choose the address that you created earlier from the drop-down list. 
 * Hit create.
 
-#### Note: This may take up to 45 minutes to complete deployment.
+### Note: This may take up to 45 minutes to complete deployment.
 
 ![](pics/VirtualNetworkGateway.png)
 
@@ -173,13 +173,13 @@ Setup pfSense to Connect to Azure through IPsec !!
 * Choose IPsec
 * Visit https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices#ipsec for the IPsec parameters used on the Microsoft side in Azure
 
-#### Taken from there we see the IKE Phase 1 requirements
+### Taken from there we see the IKE Phase 1 requirements
 ![](pics/IKE Phase1.png)
 
-#### And following are the IKE Phase 2 requirements
+### And following are the IKE Phase 2 requirements
 ![](pics/IKE Phase2.png)
 
-#### Setting up our IKE Phase1 in pfSense like so
+### Setting up our IKE Phase1 in pfSense like so
 * The Key exchange can simply be set to auto
 * The `Remote Gateway` will be the Public IP Address given on Azure
 * Match the rest up to the specifications
@@ -187,7 +187,7 @@ Setup pfSense to Connect to Azure through IPsec !!
 ![](pics/IKE Phase1-pfsense.png)
 ![](pics/IKE Phase1-pfsense2.png)
 
-#### Setting up our IKE Phase2 in pfSense like so
+### Setting up our IKE Phase2 in pfSense like so
 * We used `Tunnel IPv4` Mode
 * Local Network will be the subnet on premises you want to be visible to the Azure Subnet
 * Remote Network is the subnet on the Azure side that you want to be visible to your Local Network on the premises.
@@ -197,7 +197,7 @@ Setup pfSense to Connect to Azure through IPsec !!
 ![](pics/IKE Phase2-pfsense.png)
 ![](pics/IKE Phase2-pfsense2.png)
 
-#### Creating our Firewall rules to allow the traffic between subnets
+### Creating our Firewall rules to allow the traffic between subnets
 * At the top menu bar, click `Firewall`
 * Choose `Rules`
 * Click `IPsec` to create rules for the IPsec interface
@@ -207,7 +207,6 @@ Setup pfSense to Connect to Azure through IPsec !!
 
 ![](pics/pfSense IPsec Firewall Rules.png)
 ![](pics/pfSense IPsec Firewall Rules2.png)
-
 
 
 
@@ -232,7 +231,7 @@ Deploy a VM on Azure in your Virtual Network
 ![](pics/VMdeploy2.png)
 ![](pics/VMdeploy3.png)
 
-#### Notice now in Overview of our Virtual Network
+### Notice now in Overview of our Virtual Network
   * The Server is listed with an external and internal IP Address
  
 ![](pics/VMdeploy4.png)
@@ -247,26 +246,26 @@ Pinging the Azure VM from pfSense or clients on the Local Network
 ------------------------------
 The pictures above may be inaccurate due to some changes of the Azure setup.
 
-#### The final Network Settings are 
+### The final Network Settings are 
 * The local network is on the 10.0.50.0/24 subnet
 * The address space in Azure is 10.1.0.0/16
 * The first subnet is on 10.1.1.0/24
 * The `Subnet Gateway` is on 10.1.2.0/14
 
-#### Final Virtual Network Settings in Azure
+### Final Virtual Network Settings in Azure
 ![](pics/AsureFinalNetworkSettings.png)
 
 
-#### The Firewall rules in pfSense allow traffic both ways between 10.1.1.0 and 10.0.50.0
+### The Firewall rules in pfSense allow traffic both ways between 10.1.1.0 and 10.0.50.0
 ![](pics/pfSenseIPsecFWrules.png)
 
-#### The pfSense IPsec Status shoud look like this
+### The pfSense IPsec Status shoud look like this
 ![](pics/IPsecStatus.png)
 
-#### Lets ping it using `Ping` in `Diagnostics`
+### Lets ping it using `Ping` in `Diagnostics`
 ![](pics/pfsensePingtoAzureVM.png)
 
-#### From a client on the same subnet
+### From a client on the same subnet
 ![](pics/pfsensePingtoAzureVM2.png)
 
 <br><br><br><br>
@@ -287,6 +286,8 @@ add both of the subnets to azure and pfSense. On the Azure side you simply add m
 
 If you are modifying an ipsec connection, you will need to delete the existing VPN connection in Azure, and recreate it after adding more subnets to `Local Network Gateway`.
 
+
+
 <a name="azureSide"></a>
 
  On the Azure side: 
@@ -303,10 +304,10 @@ In the `Local Network Gateway` that you've created
   
     Note: This is what it looks like after you create the new connection as well do below.Notice the warning, which is why we needed to delete the `Connection` as stated above.
 
-#### Add as many subnets as you wish to connect to your `Virtual Network`s subnet 
+### Add as many subnets as you wish to connect to your `Virtual Network`s subnet 
 ![](2tunnelspics/Local Network Gateway setup 2 addspaces.png)
 
-#### It should look similar to this in the Overview
+### It should look similar to this in the Overview
 ![](2tunnelspics/Local Network Gateway Overview.png)
 
  Now, just below `Configuration` we will add a connection as we did above in the first scenario
@@ -331,7 +332,7 @@ On the pfSense side:
   * For the `Remote Network` choose `Network` and type the address space of the azure `Virtual Network Subnet` 
   * Do the same thing for all of the subnets you included is your local network gateway.
 
-#### Add more subnets to the Phase2 of IPSec
+### Add more subnets to the Phase2 of IPSec
 ![](2tunnelspics/phase1 and phase2 setup.png)
 
 * Restart open VPN service on pfSense,
@@ -340,7 +341,7 @@ On the pfSense side:
   * `IPSec`
   * You should see the Phase1 VPN established connection, and you should see both subnets listed in the phase2 section.
 
-#### Create firewall rules for each subnet being tunneled
+### Create firewall rules for each subnet being tunneled
 After the VPN establishes a connection, you still need to create firewall rules, to allow packets to route to the subnets you want to recieve them.
 * At the top menu bar, click `Firewall`
 * Choose `Rules`
@@ -350,9 +351,9 @@ After the VPN establishes a connection, you still need to create firewall rules,
 
 ![](2tunnelspics/pfsesneFirewallRules.png)
 
-#### This is how your status should appear
+### This is how your status should appear
 ![](2tunnelspics/ipsecStatus2tunnels.png)
 
-#### Another view from the SPDs tab
+### Another view from the SPDs tab
 ![](2tunnelspics/Status IPSec SPDs 2 subnets.png)
 
