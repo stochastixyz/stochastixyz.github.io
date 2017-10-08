@@ -312,7 +312,7 @@ In the `Local Network Gateway` that you've created
 #### It should look similar to this in the Overview
 ![](2tunnelspics/Local Network Gateway Overview.png)
 
-
+### Re-Add the IPSec VPN `Connection` 
 Now, just below `Configuration` we will add a connection as we did above in the first scenario
  * Go to the `Connections` button
  * `+ Add` a connection. 
