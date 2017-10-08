@@ -305,6 +305,7 @@ In the `Local Network Gateway` that you've created
    * Add a `Pre-shared Key` for the connection, and hit `okay`
 
  <a name="pfsenseSide"></a>
+ 
 On the pfSense side:
 --------------
 
