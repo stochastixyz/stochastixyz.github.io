@@ -135,8 +135,7 @@ Hit refresh to see your newly created virtual Network.
 
 <a name="localnetworkgateway"></a>
 
-Create a Local Network Gateway definition
-----------------------
+### Create a Local Network Gateway definition
 * On the very left panel click `Local Network Gateways`
 * At the top of the window choose the `+ ADD` button
 * `Name` it something descriptive related to your on premises local network
@@ -282,7 +281,6 @@ Multiple Phase 2s
 -----------------
 
 <a name="tunneling2ormore"></a>
-
 ### Tunneling more than one subnet over the phase 1 IPSec
 
 
@@ -311,10 +309,11 @@ In the `Local Network Gateway` that you've created
 ### Add as many subnets as you wish to connect to your `Virtual Network`s subnet 
 ![](2tunnelspics/Local Network Gateway setup 2 addspaces.png)
 
-### It should look similar to this in the Overview
+#### It should look similar to this in the Overview
 ![](2tunnelspics/Local Network Gateway Overview.png)
 
- Now, just below `Configuration` we will add a connection as we did above in the first scenario
+
+Now, just below `Configuration` we will add a connection as we did above in the first scenario
  * Go to the `Connections` button
  * `+ Add` a connection. 
    * Type a `Name` 
