@@ -260,7 +260,7 @@ The pictures above may be inaccurate due to some changes of the Azure setup.
 #### The Firewall rules in pfSense allow traffic both ways between 10.1.1.0 and 10.0.50.0
 ![](pics/pfSenseIPsecFWrules.png)
 
-#### The pfSense IPsec Staus shoud look like this
+#### The pfSense IPsec Status shoud look like this
 ![](pics/IPsecStatus.png)
 
 #### Lets ping it using `Ping` in `Diagnostics`
