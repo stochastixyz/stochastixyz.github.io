@@ -13,14 +13,14 @@ Quick Links
 * [Create a Site to Site VPN Connection](#sitetositevpn)
 * [Deploy a VM on Azure in your Virtual Network](#deployvm)
 
-### On THE pfSense SIDE
+### On THE pfSense Side
 * [Setup pfSense to Connect to Azure through IPsec](#setuppfsense)
 * [Pinging the Azure VM from pfSense or clients on the Local Network](#pingthevm)
 
-### Multiple Phase 2s
+### Multiple Phase 2 Tunnels for Multiple Subnets
 * [Tunneling more than one subnet over the phase 1 IPSec](#tunneling2ormore)
-* [On the Azure side](#azureSide)
-* [On the pfSense side](#pfsenseSide)
+* [Azure side](#azureSide)
+* [pfSense side](#pfsenseSide)
 
 **********
 
@@ -276,7 +276,7 @@ The pictures above may be inaccurate due to some changes of the Azure setup.
 
 
 
-Multiple Phase 2s
+Multiple Phase 2 Tunnels for Multiple Subnets
 =================
 -----------------
 
@@ -293,7 +293,7 @@ If you are modifying an ipsec connection, you will need to delete the existing V
 
 <a name="azureSide"></a>
 
-On the Azure side: 
+Azure side: 
 -------------
 
 * Go to `All resources`
@@ -327,7 +327,7 @@ Now, just below `Configuration` we will add a connection as we did above in the 
 
 <a name="pfsenseSide"></a>
 
-On the pfSense side:
+pfSense side:
 --------------
 
 * Go to `VPN`
