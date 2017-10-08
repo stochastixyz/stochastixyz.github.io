@@ -292,6 +292,7 @@ If you are modifying an ipsec connection, you will need to delete the existing V
 
  On the Azure side: 
 -------------
+-------------
 
 * Go to `All resources`
 * Click your existing IPSec `Connection` 
@@ -322,6 +323,7 @@ In the `Local Network Gateway` that you've created
  
 On the pfSense side:
 --------------
+--------------
 
 * Go to `VPN`
 * `IPSec`
@@ -332,14 +334,17 @@ On the pfSense side:
   * For the `Remote Network` choose `Network` and type the address space of the azure `Virtual Network Subnet` 
   * Do the same thing for all of the subnets you included is your local network gateway.
 
+
 ### Add more subnets to the Phase2 of IPSec
-![](2tunnelspics/phase1 and phase2 setup.png)
 
 * Restart open VPN service on pfSense,
 * Go check the status of the connection 
   * In pfSense go to`Status`
   * `IPSec`
   * You should see the Phase1 VPN established connection, and you should see both subnets listed in the phase2 section.
+  
+![](2tunnelspics/phase1 and phase2 setup.png)
+
 
 ### Create firewall rules for each subnet being tunneled
 After the VPN establishes a connection, you still need to create firewall rules, to allow packets to route to the subnets you want to recieve them.
