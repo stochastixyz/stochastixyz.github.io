@@ -21,8 +21,9 @@ Quick Links
 
 **********
 
+<a name="resourcegroup"></a>
 
-Creating a Resource Group<a name="resourcegroup"></a>
+Creating a Resource Group
 ------------------
 First create a resource group that will be used to sort of organize everything else together in the same region. 
 * Click resource groups on the left panel 
@@ -30,8 +31,9 @@ First create a resource group that will be used to sort of organize everything e
 
 ![](pics/ResourceGroup.png)
 
+<a name="publicIP"></a>
 
-Now lets create a public IP address for our IPSEC connection<a name="publicIP"></a>
+Now lets create a public IP address for our IPSEC connection
 -----------------------
 
  * #### If you're not sure where to find the public IP address settings
@@ -50,8 +52,9 @@ Now lets create a public IP address for our IPSEC connection<a name="publicIP"><
 
 ![](pics/Public IP Address.png)
 
+<a name="virtualnetwork"></a>
 
-Creating a Virtual Network, and our first Subnet<a name="virtualnetwork"></a>
+Creating a Virtual Network, and our first Subnet
 -------------------
 * Click Virtual networks on the left panel 
 * On the top click `+ Add` to add a Virtual Network.
@@ -76,8 +79,9 @@ Hit refresh to see your newly created virtual Network.
 
 
 
+<a name="gatewaysubnet"></a>
 
-Now we need to set up our Gateway Subnet<a name="gatewaysubnet"></a>
+Now we need to set up our Gateway Subnet
 -------------------------
 
 * On the left panel click `All Resources`
@@ -100,8 +104,9 @@ Now we need to set up our Gateway Subnet<a name="gatewaysubnet"></a>
 
 
 
+<a name="virtualnetworkgateway"></a>
 
-We need to create a Virtual Network Gateway<a name="virtualnetworkgateway"></a>
+We need to create a Virtual Network Gateway
 ---------------------------
 
 * Choose Network gateways from the left panel.
@@ -122,8 +127,9 @@ We need to create a Virtual Network Gateway<a name="virtualnetworkgateway"></a>
 
 
 
+<a name="localnetworkgateway"></a>
 
-Create a Local Network Gateway definition<a name="localnetworkgateway"></a>
+Create a Local Network Gateway definition
 ----------------------
 * On the very left panel click `Local Network Gateways`
 * At the top of the window choose the `+ ADD` button
@@ -139,8 +145,9 @@ Create a Local Network Gateway definition<a name="localnetworkgateway"></a>
 
 
 
+<a name="sitetositevpn"></a>
 
-Create a Site to Site VPN Connection<a name="sitetositevpn"></a>
+Create a Site to Site VPN Connection
 ---------------------
 
 * If not still on the `Local Network Gateway`, click the name of your `Local Network Gateway`
@@ -157,8 +164,9 @@ Create a Site to Site VPN Connection<a name="sitetositevpn"></a>
 
 
 
+<a name="setuppfsense"></a>
 
-Setup pfSense to Connect to Azure through IPsec !!<a name="setuppfsense"></a>
+Setup pfSense to Connect to Azure through IPsec !!
 ----------------------------
 * Login to pfsense
 * Go to the Top Menu bar and choose `VPN`
@@ -204,8 +212,9 @@ Setup pfSense to Connect to Azure through IPsec !!<a name="setuppfsense"></a>
 
 
 
+<a name="deployvm"></a>
 
-Deploy a VM on Azure in your Virtual Network<a name="deployvm"></a>
+Deploy a VM on Azure in your Virtual Network
 --------------------
 
 * In the left panel, click virtual machines
@@ -232,8 +241,9 @@ Deploy a VM on Azure in your Virtual Network<a name="deployvm"></a>
 
 
 
+<a name="pingthevm"></a>
 
-Pinging the Azure VM from pfSense or clients on the Local Network<a name="pingthevm"></a>
+Pinging the Azure VM from pfSense or clients on the Local Network
 ------------------------------
 The pictures above may be inaccurate due to some changes of the Azure setup.
 
@@ -267,8 +277,9 @@ Multiple Phase 2s
 =================
 -----------------
 
+<a name="tunneling2ormore"></a>
 
-Tunneling more than one subnet over the phase 1 IPSec<a name="tunneling2ormore"></a>
+Tunneling more than one subnet over the phase 1 IPSec
 -------------------
 
 In order to route between two different subnets from the ipsec Azure side to pfSense, you need to
@@ -276,7 +287,9 @@ add both of the subnets to azure and pfSense. On the Azure side you simply add m
 
 If you are modifying an ipsec connection, you will need to delete the existing VPN connection in Azure, and recreate it after adding more subnets to `Local Network Gateway`.
 
- On the Azure side: <a name="azureSide"></a>
+<a name="azureSide"></a>
+
+ On the Azure side: 
 -------------
 
 * Go to `All resources`
