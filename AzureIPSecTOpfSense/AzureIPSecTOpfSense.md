@@ -54,7 +54,7 @@ Now lets create a public IP address for our IPSEC connection
 
 <a name="virtualnetwork"></a>
 
-Creating a Virtual Network, and our first Subnet
+Creating a Virtual Network, and our first subnet
 -------------------
 * Click Virtual networks on the left panel 
 * On the top click `+ Add` to add a Virtual Network.
@@ -64,7 +64,7 @@ Creating a Virtual Network, and our first Subnet
 * Set the address space for something like a /16 to give you space for a bunch of /24s later
 * For the resource Group, choose `Use existing` to use an existing Resource Group 
   * and pick the one you just created earlier, from this dropdown.
-* Create a name for your first Subnet, 
+* Create a name for your first subnet, 
   * Choose an address range that fits within the Address Space that you created just above.
 
 * If you have green check marks all the way down go ahead and head `Create`.
@@ -86,14 +86,14 @@ Now we need to set up our Gateway Subnet
 
 * On the left panel click `All Resources`
 * From the Menu that appears, click on your Existing Virtual Network 
-* On the Submenu, click on `Subnets` to view the currently created subnets. 
+* On the sub-menu, click on `Subnets` to view the currently created subnets. 
 * On the top right panel you will see a plus sign labeled  `Gateway Subnet`. 
-* Click the plus sign to create a new Gateway Subnet.
+* Click the plus sign to create a new `Gateway Subnet`.
 
 ![](pics/Adding gateway subnet1.png)
 
 * The name is grayed out so you will not be able to change it. 
-* Choose an address range within the Address Space you set up when creating your Virtual Network, but different than your first Subnet.
+* Choose an address range within the Address Space you set up when creating your Virtual Network, but different than your first subnet.
 
 ![](pics/Adding gateway subnet2.png)
 
@@ -136,7 +136,7 @@ Create a Local Network Gateway definition
 * `Name` it something descriptive related to your on premises local network
 * `IP address` will be the IP address  given by your ISP for your local site
 * In `Address Space` enter the subnet in CIDR notation for the  local area network behind the pfSense router 
-  * You way wish to add more than one Subnet if there are more behind the pfSense router you wish to expose
+  * You way wish to add more than one subnet if there are more behind the pfSense router you wish to expose
 * For `Resource Group`, use the existing one we created earlier
 * Click create
 
@@ -225,7 +225,7 @@ Deploy a VM on Azure in your Virtual Network
 * create using your existing Resource Group. 
   * ##### Note that your location may not support creating a VM under a free trial, in which case you will have to redo your whole networking scheme under a new resource location.
 * Choose whatever options you need for a relative price point
-* Most of the settings in step 3 will be preselected
+* Most of the settings in step 3 will be pre-selected
 * Then finally purchase the VM and it will provision
 
 ![](pics/VMdeploy.png)
@@ -248,10 +248,10 @@ Pinging the Azure VM from pfSense or clients on the Local Network
 The pictures above may be inaccurate due to some changes of the Azure setup.
 
 #### The final Network Settings are 
-* The local network is on the 10.0.50.0/24 Subnet
-* The Address space in Azure is 10.1.0.0/16
-* The First Subnet is on 10.1.1.0/24
-* The Subnet Gateway is on 10.1.2.0/14
+* The local network is on the 10.0.50.0/24 subnet
+* The address space in Azure is 10.1.0.0/16
+* The first subnet is on 10.1.1.0/24
+* The `Subnet Gateway` is on 10.1.2.0/14
 
 #### Final Virtual Network Settings in Azure
 ![](pics/AsureFinalNetworkSettings.png)
@@ -309,7 +309,7 @@ In the `Local Network Gateway` that you've created
 #### It should look similar to this in the Overview
 ![](2tunnelspics/Local Network Gateway Overview.png)
 
- Now, just below `Configuration` we will add a connection as we did above in the first senario.
+ Now, just below `Configuration` we will add a connection as we did above in the first scenario
  * Go to the `Connections` button
  * `+ Add` a connection. 
    * Type a `Name` 
@@ -340,7 +340,7 @@ On the pfSense side:
   * `IPSec`
   * You should see the Phase1 VPN established connection, and you should see both subnets listed in the phase2 section.
 
-#### Create Firewall Rules for Each Subnet being tunneled
+#### Create firewall rules for each subnet being tunneled
 After the VPN establishes a connection, you still need to create firewall rules, to allow packets to route to the subnets you want to recieve them.
 * At the top menu bar, click `Firewall`
 * Choose `Rules`
