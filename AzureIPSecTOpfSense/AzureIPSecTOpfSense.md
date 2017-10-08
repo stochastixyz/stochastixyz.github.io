@@ -324,6 +324,7 @@ Now, just below `Configuration` we will add a connection as we did above in the 
 
 
 <a name="pfsenseSide"></a>
+
 On the pfSense side:
 --------------
 
