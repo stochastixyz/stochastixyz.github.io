@@ -362,6 +362,7 @@ After the VPN establishes a connection, you still need to create firewall rules,
 ![](2tunnelspics/pfsesneFirewallRules.png)
 
 ### This is how your status should appear
+  * Notice two subnets listed in the Phase 2 section!
 ![](2tunnelspics/ipsecStatus2tunnels.png)
 
 ### Another view from the SPDs tab
