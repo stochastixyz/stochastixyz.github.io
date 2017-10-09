@@ -49,11 +49,11 @@ First create a resource group that will be used to sort of organize everything e
   
     * Alternatively you can click more services on the left and as you scroll down you should see one labeled public IP addresses.
 
-* Name it something perhaps related to the location
-  * For the SKU, we are using Basic.
+* `Name` it something perhaps related to the location
+  * For the `SKU`, we are using `Basic`.
   * We are staying with an ipv4 address 
-  * We are leaving the address Dynamic as we do not have to worry about the address changing as long as we keep the name I believe, or it is attached to the same Gateway.
-  * Use an existing Resource Group 
+  * We are leaving the `IP Address Assignment` `Dynamic` as we do not have to worry about the address changing as long as we keep the name I believe, or it is attached to the same Gateway.
+  * Use an existing `Resource Group` 
       * We will use the resource Group that we created at the start.
 
 ![](pics/Public IP Address.png)
