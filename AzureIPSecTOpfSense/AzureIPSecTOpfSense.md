@@ -118,12 +118,12 @@ Hit refresh to see your newly created virtual Network.
 * Choose Network gateways from the left panel.
 * Click add under the middle panel that pops up. 
 * Under the panel labeled `Create Virtual Network Gateway`, put in a name maybe something like East-US-Vnet-GW1. 
-* For Gateway type, choose VPN, 
-* For VPN type choose route based, 
+* For `Gateway type`, choose VPN, 
+* For `VPN type` choose `Route-Based` 
   * Route based VPN Gateway types are offered in three SKUs, Basic, Standard, and High-performance, we will just use Basic.
-* Down a little under Virtual Network, choose The Virtual Network that you created earlier, from the list.
-* For the public IP address, choose the address that you created earlier from the drop-down list. 
-* Hit create.
+* Down a little under Virtual Network, choose The `Virtual Network` that you created earlier, from the list.
+* For the `Public IP address`, choose the address that you created earlier from the drop-down list. 
+* Hit `create`
 
 #### Note: This may take up to 45 minutes to complete deployment.
 
