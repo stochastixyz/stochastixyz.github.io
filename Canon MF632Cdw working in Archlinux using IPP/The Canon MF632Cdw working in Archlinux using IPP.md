@@ -1,4 +1,4 @@
-<title>The Canon MF632Cdw working in Archlinux using IPP</title>
+
 The Canon MF632Cdw working in Archlinux using IPP
 ============
 
@@ -139,6 +139,7 @@ I tried, and it seemed to set it up ok, but I was not able to print, but this wa
  * I just right click on the Printer icon in the task manager and choose `Configure Printers`.
  * You can also go to `System Settings\Printers`.
  * You can add a printer, and it has basically all of the same options as in the CUPS web interface.
+
 
 In Summary
 -----------
