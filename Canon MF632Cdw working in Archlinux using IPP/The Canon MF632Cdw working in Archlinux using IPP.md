@@ -110,7 +110,7 @@ Adding the Printer to CUPS
     *ShortNickName: "CNMF632C/634C CNMF632C/634C"
     ...
    ```
-   This will output a PPD file that you may be able to use with something other than the third type of connection which is the driverless setup.
+   This will output the same PPD file that I believe would automatically be sent to CUPS when also contacting the printer on its own. I am not yet sure if this is the same PPD that would be required to setup a connection through socket:// for example. 
    
 ### Maybe creating your own print queue from the command line?
 I tried, and it seemed to set it up ok, but I was not able to print, but this was before figuring out the Avahi/nsswitch.conf issue, and I havent tried yet since. 
