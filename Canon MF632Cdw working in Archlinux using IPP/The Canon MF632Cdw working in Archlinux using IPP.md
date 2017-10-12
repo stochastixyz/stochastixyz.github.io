@@ -114,11 +114,13 @@ Adding the Printer to CUPS
    
 ### Maybe creating your own print queue from the command line?
 I tried, and it seemed to set it up ok, but I was not able to print, but this was before figuring out the Avahi/nsswitch.conf issue, and I havent tried yet since. 
-*  As long as DNS is resolving for `Canonmf632.local` or the `nsswitch.conf` file is set up to do `.local` queries, you should be able to connect, finish the setup, and print.
-  ```
-  [root@jcomp jeremy]# lpadmin -p myprintqueue -v ipp://Canonmf632.local:631/ipp/print -E -m everywhere
 
-  ```
+*  As long as DNS is resolving for `Canonmf632.local` or the `nsswitch.conf` file is set up to do `.local` queries, you should be able to connect, finish the setup, and print.
+
+```
+[root@jcomp jeremy]# lpadmin -p myprintqueue -v ipp://Canonmf632.local:631/ipp/print -E -m everywhere
+
+```
  
 ### Create the printer connection through CUPS 
 * Access the web interface via [http://localhost:631](http://localhost:631)
