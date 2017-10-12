@@ -148,6 +148,7 @@ In Summary
 
 1. Make sure your `/etc/nsswitch.conf` file is set to handle `*.local` queries.
   * My hosts line currently looks like:
+  
    ```
    hosts: files mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] dns myhostname
    ```
