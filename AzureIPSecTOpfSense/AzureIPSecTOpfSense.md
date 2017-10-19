@@ -394,7 +394,8 @@ Duplicating a DC to the Azure Server 2012 R2 VM
 * UPnP Device Host
 
 
-### Setting the DNS server to the Primary Domain Controller
+### Setting the DNS server to point to the Primary Domain Controller
+#### On the future DC
 If the 2012 Server up in Azure cannot see the Primary Domain controller, it will not be able to join the domain, and it will not be able to promote to a Domain Controller.  
 
 Also, since we are going to `Install From Media`, we will want to access a share on the Server 2012 instance that will be promoted.
@@ -414,6 +415,7 @@ Also, since we are going to `Install From Media`, we will want to access a share
 
 <a name="settingDomainName"></a>
 ### Joining the Domain 
+#### On the future DC
 1. Open `Control Panel`
 2. Change the view to `Small Icons`
 3. Open `System`
@@ -429,6 +431,7 @@ Also, since we are going to `Install From Media`, we will want to access a share
 
 <a name="createNetworkShare"></a>
 ### Create a network share for IFM
+#### On the future DC
 Obviously the point of Install From Media is to transfer the required data outside of the network. Perhaps the WAN link is really slow, and the Domain files are huge. You can save the files and snailmail them to another location if you need to.
 
 The point here is just to document the method of using `IFM`.
@@ -444,6 +447,7 @@ How you get them to the other Domain Controller can vary greatly.
 
 <a name="mapNetworkShare"></a>
 ### Map IFM Share to Network Drive on the Primary DC
+#### On the Primary DC
 1. On the Primary DC, Open `Windows Explorer`.
 2. `Right Click` on `This PC`  and hit `Map Network Drive`.
 3. Chose a Drive letter.
@@ -454,49 +458,49 @@ How you get them to the other Domain Controller can vary greatly.
 <a name="duplicateactivdirectoy"></a>
 ### Duplicating the Active Directory 
 
-#### On DC1 open a command prompt as an administrator
+1.On DC1 open a command prompt as an administrator
 
-#### Set the active instance to the NTDS environment
+2. Set the active instance to the NTDS environment
 ```
 C:\Users\Administrator>ntdsutil
 ntdsutil: activate instance ntds
 Active instance set to "ntds".
 ```
-#### Enter into the **Install from Media** prompt and Create IFM media with SYSVOL for a full AD DC
+3. Enter into the `Install from Media` prompt and Create IFM media with SYSVOL for a full AD DC
 ```
 C:\Users\Administrator>ntdsutil
 ntdsutil: ifm
 ifm:  create sysvol full z:\
 ```
 
-### Connect to server 2,  Azure2012r2
-
-#### Connect to Server Azure2012r2 and promote it to a Domain Controller
-* Connect to the server as the Administrator account that is part of the domain, so that you have permissions to duplicate the AD 
-* In this case connect as Azure2012r2/Administrator
-* Click the Warning triangle at the top right and click the link to promote to Domain Controler
-* You want to check **Add a domain controller to an existing domain**
-* Fill out the name of the domain we are in if it is not already filled
+### Connect to Server Azure2012r2,  and promote it to a Domain Controller
+1. Connect to the server as the Administrator account that is part of the domain, so that you have permissions to duplicate the AD 
+2. In this case connect as `Azure2012r2/Administrator`
+3. Click the `Warning triangle` at the top right and click the link to `promote to Domain Controler`
+4. You want to check `Add a domain controller to an existing domain`
+5. Fill out the `name` of the domain we are in if it is not already filled
 
 **NOTE: **When you supply the domain logon user name, you must include the domain name as a prefix. For example, use MyDomain\Administrator, where MyDomain is the name of the domain.
-* Click **Next**
-* Un-Check **Domain Name System (DNS) server** and **Global Catalog (GC)**
-* Enter your Active Directory Restoration Passowrd and hit **Next*
-* Choose the option to Specify Install From Media
-* Point the location to the share that the Primary DC backed up to
-* Next Next Next
-* Reboot
-* Login as Domain Administrator.
 
-**NOTE:** In DNS Manager in DC1, Under **sites**, then the domain name, then **tcp**,  you should see a second entry in there for DC2.
+6. Click `Next`
+7. Un-Check `Domain Name System (DNS) server` and `lobal Catalog (GC)*`if you dont want this server to act in this capacity
+8. Enter your Active Directory Restoration Passowrd and hit `Next`
+9.  Choose the option to Specify `Install From Media`
+10. Point the location to the share we created earlier, that the Primary DC backed up to
+11. Next Next Next
+12. Reboot
+13. Login as Domain Administrator.
+
+**NOTE:** In DNS Manager in DC1, Under `sites`, then the domain name, then `tcp`,  you should see a second entry in there for `Azure2012r2`.
 
 
 ### Going from an older server like 2008 to 2012?
 
-You need to prep your Domain to support the Server 2012 Domain Controller
-#### Run **adprep** utility
-* On the installation media, in the folder `D:\support\adprep` run the adprep executable
-* Run it twice, once for the Forest and once for the Domain
+**You need to prep your Domain to support the Server 2012 Domain Controller**
+
+#### Run `adprep` utility
+1. On the installation media, in the folder `D:\support\adprep` run the adprep executable
+2. Run it twice, once for the Forest and once for the Domain
 ```
 C:\Users\Administrator.OCTRAHOME>adprep /forestprep
 C:\Users\Administrator.OCTRAHOME>adprep /domainprep
