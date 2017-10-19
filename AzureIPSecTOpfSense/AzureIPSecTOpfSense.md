@@ -429,27 +429,30 @@ Also, since we are going to `Install From Media`, we will want to access a share
 
 <a name="createNetworkShare"></a>
 ### Create a network share for IFM
-1. Open `Windows Explorer`
-2. Maybe go to (C:) and create a directory names `IFM`
-3. `Right Click` on it and hot `Properties`
-4. Click the `Sharing` tab
-5. Under `Network File and Filder Sharing`, click `Share`
-6. Choose the Domain Administrator to share the directory with
+Obviously the point of Install From Media is to transfer the required data outside of the network. Perhaps the WAN link is really slow, and the Domain files are huge. You can save the files and snailmail them to another location if you need to.
+
+The point here is just to document the method of using `IFM`.
+In this particualr case, I'm just sharing them over the network.
+How you get them to the other Domain Controller can vary greatly.
+
+1. Open `Windows Explorer`.
+2. Maybe go to (C:) and create a directory named `IFM`.
+3. `Right Click` on it and hit `Properties`.
+4. Click the `Sharing` tab.
+5. Under `Network File and Folder Sharing`, click `Share`.
+6. Choose the Domain Administrator (or whoever had Domain Admin rights) to share the directory with.
 
 <a name="mapNetworkShare"></a>
 ### Map IFM Share to Network Drive on the Primary DC
-1. On the Primary DC, Open `Windows Explorer`
-2. `Right Click` on `This PC`  and hit `Map Network Drive`
-3. Chose a Drive letter
-3. Type the name of the shared folder. Ex.  `\\Azure2012r2\IFM`
-4. If it connects, you will see it with the chosen Drive letter
+1. On the Primary DC, Open `Windows Explorer`.
+2. `Right Click` on `This PC`  and hit `Map Network Drive`.
+3. Chose a Drive letter.
+3. Type the name of the shared folder. Ex.  `\\Azure2012r2\IFM`.
+4. If it connects, you will see it with the chosen Drive letter.
 
 
 <a name="duplicateactivdirectoy"></a>
 ### Duplicating the Active Directory 
-
-#### Create a mapped drive on the Server 
-Create a mapped drive on the server **DC1** you wish to duplicate, pointing to a share that you have created on the server **DC2** that will be the duplicate
 
 #### On DC1 open a command prompt as an administrator
 
