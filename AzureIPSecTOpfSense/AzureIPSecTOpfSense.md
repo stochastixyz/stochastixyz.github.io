@@ -1,4 +1,5 @@
-IPsec Tunnel between Azure Virtual Network and pfSense
+Domain Controllers Connected by IPsec Tunnel 
+Between Azure Virtual Network and pfSense
 ============================
 
 Quick Links
@@ -21,6 +22,13 @@ Quick Links
 * [Tunneling more than one subnet over the phase 1 IPSec](#tunneling2ormore)
 * [Azure side](#azureSide)
 * [pfSense side](#pfsenseSide)
+
+### Duplicating a DC to the Azure Server 2012 R2 VM
+* [Setting the DNS server to the Primary Domain Controller](#settingDNS)
+* [Joining the Domain](#settingDomainName)
+* [Create a network share for IFM](#createNetworkShare)
+* [Map IFM Share to Network Drive on the Primary DC](#mapNetworkShare)
+* [Duplicating the Active Directory](#duplicateactivdirectoy)
 
 **********
 
@@ -368,3 +376,129 @@ After the VPN establishes a connection, you still need to create firewall rules,
 ### Another view from the SPDs tab
 ![](2tunnelspics/Status IPSec SPDs 2 subnets.png)
 
+
+
+<br><br><br><br>
+
+
+
+Duplicating a DC to the Azure Server 2012 R2 VM
+=================
+-----------------
+
+<a name="settingDNS"></a>
+### Connect to Server 1 , DC1
+#### Make sure that the following dependency services are started:
+* DNS Client
+* Function Discovery Resource Publication
+* SSDP Discovery
+* UPnP Device Host
+
+
+### Setting the DNS server to the Primary Domain Controller
+If the 2012 Server up in Azure cannot see the Primary Domain controller, it will not be able to join the domain, and it will not be able to promote to a Domain Controller.  
+
+Also, since we are going to `Install From Media`, we will want to access a share on the Server 2012 instance that will be promoted.
+
+1. Open `Control Panel`
+2. Go to `Network and Sharing Center`
+3. Click the appropriate network conection
+4. Click `Properties`
+5. Highlight `Internet Protocol Version 4(TCP/IPv4)`
+6. and click `Properties`
+7. Click the radio button `Use the following DNS server addresses:`
+8. Enter the IP address of the primary domain controller
+9. In our case it is `10.100.1.2` inside the GNS3 network
+10.Restart the Server VM from the Azure web gui
+  * Note, after changing DNS, the RDP connection will most likely be lost
+11. After reestablishing a connection, move on to the next step
+
+<a name="settingDomainName"></a>
+### Joining the Domain 
+1. Open `Control Panel`
+2. Change the view to `Small Icons`
+3. Open `System`
+4. Under `Computer name:` Click `Change settings`
+5. Click `Change` to set the domain to the one we want to join
+6. Set the `Computer name` if you desire
+7. Click the Radio button `Domain`
+8. Enter the domain name and top level domain of your network
+9. Click `More` to set the `Primary DNS suffix of this computer`
+10. Click ok a bunch and enter the Domain Administrators credentials to join the domain
+11. `Restart` the server
+12. Login as `Administrator@mydomainname.local` or `mydomainname\Administrator`
+
+<a name="createNetworkShare"></a>
+### Create a network share for IFM
+1. Open `Windows Explorer`
+2. Maybe go to (C:) and create a directory names `IFM`
+3. `Right Click` on it and hot `Properties`
+4. Click the `Sharing` tab
+5. Under `Network File and Filder Sharing`, click `Share`
+6. Choose the Domain Administrator to share the directory with
+
+<a name="mapNetworkShare"></a>
+### Map IFM Share to Network Drive on the Primary DC
+1. On the Primary DC, Open `Windows Explorer`
+2. `Right Click` on `This PC`  and hit `Map Network Drive`
+3. Chose a Drive letter
+3. Type the name of the shared folder. Ex.  `\\Azure2012r2\IFM`
+4. If it connects, you will see it with the chosen Drive letter
+
+
+<a name="duplicateactivdirectoy"></a>
+Duplicating the Active Directory 
+------------------------
+
+#### Create a mapped drive on the Server 
+Create a mapped drive on the server **DC1** you wish to duplicate, pointing to a share that you have created on the server **DC2** that will be the duplicate
+
+#### On DC1 open a command prompt as an administrator
+
+#### Set the active instance to the NTDS environment
+```
+C:\Users\Administrator>ntdsutil
+ntdsutil: activate instance ntds
+Active instance set to "ntds".
+```
+#### Enter into the **Install from Media** prompt and Create IFM media with SYSVOL for a full AD DC
+```
+C:\Users\Administrator>ntdsutil
+ntdsutil: ifm
+ifm:  create sysvol full z:\
+```
+
+### Connect to server 2,  Azure2012r2
+
+#### Connect to Server Azure2012r2 and promote it to a Domain Controller
+* Connect to the server as the Administrator account that is part of the domain, so that you have permissions to duplicate the AD 
+* In this case connect as Azure2012r2/Administrator
+* Click the Warning triangle at the top right and click the link to promote to Domain Controler
+* You want to check **Add a domain controller to an existing domain**
+* Fill out the name of the domain we are in if it is not already filled
+
+**NOTE: **When you supply the domain logon user name, you must include the domain name as a prefix. For example, use MyDomain\Administrator, where MyDomain is the name of the domain.
+* Click **Next**
+* Un-Check **Domain Name System (DNS) server** and **Global Catalog (GC)**
+* Enter your Active Directory Restoration Passowrd and hit **Next*
+* Choose the option to Specify Install From Media
+* Point the location to the share that the Primary DC backed up to
+* Next Next Next
+* Reboot
+* Login as Domain Administrator.
+
+**NOTE:** In DNS Manager in DC1, Under **sites**, then the domain name, then **tcp**,  you should see a second entry in there for DC2.
+
+
+### Going from an older server like 2008 to 2012?
+
+You need to prep your Domain to support the Server 2012 Domain Controller
+#### Run **adprep** utility
+* On the installation media, in the folder `D:\support\adprep` run the adprep executable
+* Run it twice, once for the Forest and once for the Domain
+```
+C:\Users\Administrator.OCTRAHOME>adprep /forestprep
+C:\Users\Administrator.OCTRAHOME>adprep /domainprep
+```
+* To run the **forest prep**, you have to be a member of the **Enterprise** admins group, and the **Schema** admins group
+* To run the **domain prep**, you have to be a member of the **domain** admins group in the domain you run it in.
