@@ -1,5 +1,4 @@
-Domain Controllers Connected by IPsec Tunnel 
-Between Azure Virtual Network and pfSense
+Domain Controllers Connected by IPsec Tunnel Between Azure Virtual Network and pfSense
 ============================
 
 Quick Links
@@ -447,8 +446,7 @@ Also, since we are going to `Install From Media`, we will want to access a share
 
 
 <a name="duplicateactivdirectoy"></a>
-Duplicating the Active Directory 
-------------------------
+### Duplicating the Active Directory 
 
 #### Create a mapped drive on the Server 
 Create a mapped drive on the server **DC1** you wish to duplicate, pointing to a share that you have created on the server **DC2** that will be the duplicate
