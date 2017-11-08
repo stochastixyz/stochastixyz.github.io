@@ -42,16 +42,16 @@ make[2]: *** [/usr/src/linux-4.13.10-1/Makefile:1069: prepare0] Error 2
 make[1]: *** [Makefile:145: sub-make] Error 2
 make: *** [Makefile:24: __sub-make] Error 2
 ```
-* `libelf-devel` without you may get "Cannot use CONFIG_STACK_VALIDATION, please install libelf-dev, libelf-devel or elfutils-libelf-devel" when running `make`
+* `libelf-devel` without it you may get "Cannot use CONFIG_STACK_VALIDATION, please install libelf-dev, libelf-devel or elfutils-libelf-devel" when running `make`
 
 #### *Note: Other dependancy packages may get pulled in like 
-* If you have problems compiling later, perhpas one of these are required but did not make it in.
 
 > binutils bison bison-lang dwz gcc7 gettext-tools glibc-devel kernel-default-devel
 kernel-devel kernel-macros libasan4 libatomic1 libcilkrts5 libitm1 liblsan0 
 libmpx2 libmpxwrappers2 libopenssl-1_0_0-devel libopenssl-devel libtsan0 libubsan0 
 linux-glibc-devel m4 patch systemd-rpm-macros tack zlib-devel 
 
+* If you have problems compiling later, perhpas one of these are required but did not make it in.
 
 
 
@@ -59,9 +59,10 @@ linux-glibc-devel m4 patch systemd-rpm-macros tack zlib-devel
 
 Compiling locally on the machine
 ----------------
-* We will be compiling in a sub directory within the `/usr/src/linux/` directory
+* In the README.SUSE file it appears the recommend compiling in a dir within the  `/usr/src/linux/` dir
+* You can compile just about anywhere really.
 * by default `/usr/src/linux/` will be a link to the latest installed kernel
-* We will create a build directory seperate from `/usr/src/linux/`
+* We will create a build directory seperate from `/usr/src/linux/` since im not trying to replace the existing kernel
   * Taken from `/usr/src/linux/README.SUSE` Under **COMPILING YOUR OWN KERNEL**
   > (2)  Create a build directory for use in configuring and building
        the kernel. Using /usr/src/linux directly requires root priviledges
