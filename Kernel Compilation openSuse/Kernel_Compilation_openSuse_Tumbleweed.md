@@ -1,5 +1,8 @@
 Kernel Compilation in openSuse Tumbleweed
 ================
+### Resources 
+* https://doc.opensuse.org/documentation/leap/reference/html/book.opensuse.reference/cha.grub2.html
+* https://build.opensuse.org/package/view_file/Kernel:HEAD/kernel-source/README.SUSE
 
 Methods for Compilation
 -----------------
