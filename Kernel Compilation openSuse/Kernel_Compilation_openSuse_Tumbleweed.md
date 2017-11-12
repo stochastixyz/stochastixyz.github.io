@@ -10,7 +10,7 @@ There may be many ways to go about this, but the two ways we will cover here are
 
 * Compiling locally in the machine
 
-* Compiling on the Suse Build Service
+* Compiling on the Suse Build Service (To be added at a later date)
 
 
 
